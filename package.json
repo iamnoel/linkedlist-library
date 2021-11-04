@@ -1,0 +1,11 @@
+{
+  "name": "linkedlist-library",
+  "version": "1.0.0",
+  "description": "A LinkedList implementation in JavaScript with a sample use case",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "Noel Ward",
+  "license": "ISC"
+}
