@@ -1,4 +1,5 @@
-const { Node, LinkedList } = require('./LinkedList')
+const { Node, LinkedList } = require('./LinkedList');
+const { LinkedListTester } = require('./tests');
 
 /**
  * Calculates the highest possible value of pairs of numbers in a LinkedList
@@ -18,7 +19,7 @@ const getMaximumPair = (node) => {
     let firstNode = node.next;
     let currentNode = firstNode;
     let previousNode = firstNode;
-    
+
     while (currentNode) {
         firstNode = index === 0 ? new Node(currentNode.data, currentNode.next) : firstNode;
         firstPageCount = index === 0 ? currentNode.data : firstPageCount;
@@ -29,8 +30,8 @@ const getMaximumPair = (node) => {
             currentNode = currentNode.next;
             index++;
         } else {
-            console.log(`First node: ${firstPageCount}, Last node: ${lastPageCount} (Total nodes: ${index+1})| Pair Sum: ${firstPageCount+lastPageCount}`)
-            pageCounts.push(firstPageCount+lastPageCount);
+            console.log(`First node: ${firstPageCount}, Last node: ${lastPageCount} (Total nodes: ${index + 1})| Pair Sum: ${firstPageCount + lastPageCount}`)
+            pageCounts.push(firstPageCount + lastPageCount);
             node = firstNode.next;
             previousNode.next = null;
             currentNode = node;
@@ -57,23 +58,11 @@ const getMaximumPair = (node) => {
  */
 const main = () => {
     const list = new LinkedList();
-    const EXPECTED_OUTPUT = 6;
 
-    list.insert(3);
-    list.insert(3);
-    list.insert(2);
-    list.insert(5);
-    list.insert(1);
-    list.insert(2);
-    list.insert(2);
+    const test = new LinkedListTester(list)
+    test.add([1, 2, 2], 2)
 
-    const output = getMaximumPair(list.head)
-    
-    if (output === EXPECTED_OUTPUT) {
-        console.log(`Success: ${output}`)
-    } else {
-        console.log(`Fail: ${output}`)
-    }
+    test.start(getMaximumPair, true)
 }
 
 main();

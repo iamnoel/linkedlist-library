@@ -1,4 +1,8 @@
 class Node {
+    /**
+     * @param {number} data 
+     * @param {Node} next 
+     */
     constructor(data, next = null) {
         this.data = data;
         this.next = next;
@@ -6,8 +10,11 @@ class Node {
 }
 
 class LinkedList {
-    constructor() {
-        this.head = null;
+    /**
+     * @param {Node} head 
+     */
+    constructor(head = null) {
+        this.head = head;
     }
 
     /**
@@ -37,7 +44,7 @@ class LinkedList {
      * @returns The data stored in the Node at the given index.
      * Returns false if there are fewer Nodes than the requested index.
      */
-    getAt(getIndex) {
+    get(getIndex) {
         if (!this.head) {
             return null;
         }
@@ -97,10 +104,19 @@ class LinkedList {
     }
 
     /**
-     * Inserts a new Node at the tail of the LinkedList
+     * Inserts a new Node at the head of the LinkedList
      * @param {number} data A number to be stored in the data of the Node
      */
     insert(data) {
+        const node = new Node(data, this.head);
+        this.head = node;
+    }
+
+    /**
+     * Inserts a new Node at the tail of the LinkedList
+     * @param {number} data A number to be stored in the data of the Node
+     */
+    insertLast(data) {
         if (!this.head) {
             this.head = new Node(data);
             return;
@@ -115,15 +131,6 @@ class LinkedList {
         }
 
         tail.next = new Node(data);
-    }
-
-    /**
-     * Inserts a new Node at the head of the LinkedList
-     * @param {number} data A number to be stored in the data of the Node
-     */
-    insertFirst(data) {
-        const node = new Node(data, this.head);
-        this.head = node;
     }
 
     /**
