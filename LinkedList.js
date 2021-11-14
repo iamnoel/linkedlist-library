@@ -219,6 +219,86 @@ class LinkedList {
         this.tail = previousNode;
         this.length--;
     }
+
+
+    /**
+     * Creates an iterable of [index, value] pairs for every Node and its data in the LinkedList.
+     * @returns {Iterable[]} An iterable of the key, value pairs
+     */
+    entries() {
+        const list = this;
+        let node = list.head;
+        let index = 0;
+
+        return {
+            [Symbol.iterator]() {
+                return this;
+            },
+            next() {
+                if (node !== null) {
+                    // const value = { key: [index], value: [node.data]}
+                    // const value = { key: [index], value: [node.data]}
+                    // const value = { value: { key: [index], value: [node.data]}}
+                    const value = { value: [index, node.data] }
+                    index++;
+                    node = node.next;
+                    return value;
+                } else {
+                    return { done: true }
+                }
+            }
+        }
+    }
+
+    /**
+     * Creates an Iterable of the index from each Node in the LinkedList
+     * @returns {Iterable} An Iterable of the keys in data
+     */
+    keys() {
+        const list = this;
+        let node = list.head;
+        let index = 0;
+
+        return {
+            [Symbol.iterator]() {
+                return this;
+            },
+            next() {
+                if (node !== null) {
+                    const value = { value: index }
+                    index++;
+                    node = node.next;
+                    return value;
+                } else {
+                    return { done: true }
+                }
+            }
+        }
+    }
+
+    /**
+     * Creates an Iterable of the data from each Node in the LinkedList
+     * @returns {Iterable} An Iterable of the values in data
+     */
+    values() {
+        const list = this;
+        let node = list.head;
+
+        return {
+            [Symbol.iterator]() {
+                return this;
+            },
+            next() {
+                if (node !== null) {
+                    const value = { value: node.data }
+                    node = node.next
+                    return value
+                } else {
+                    return { done: true };
+                }
+            }
+        };
+    }
 }
 
 module.exports = {
