@@ -42,7 +42,7 @@ class LinkedListTester {
      * @param {number} outputs The output of each test
      * @param {Result[]} results The pass/fail result of each test
      */
-    constructor (list = new LinkedList(), testCases = LinkedListTester.#DEFAULT_TEST_CASES,  outputs= [], results = []) {
+    constructor (list = new LinkedList(), testCases = LinkedListTester.#DEFAULT_TEST_CASES,  outputs = [], results = []) {
         Object.freeze(LinkedListTester.#DEFAULT_TEST_CASES) // Ensure the default cases are immutable when this is instantiated
         this.list = list
         this.testCases = [...testCases]
