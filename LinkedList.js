@@ -1,5 +1,6 @@
 class Node {
     /**
+     * A Node of data within a Doubly Linked List. Stores data as well as references to the previous and next Nodes in the sequence.
      * @param {number} data The data to be stored
      * @param {Node} next A reference to the next Node in a list
      * @param {Node} previous A reference to the previous Node in a list
@@ -13,13 +14,13 @@ class Node {
 
 class LinkedList {
     /**
+     * A Doubly Linked List containing Nodes of data. Stores a reference to the head Node, the tail Node, and tracks the length.
      * @param {Node} head The first Node in the LinkedList
-     * @param {Node} tail The last Node in the LinkedList
      */
-    constructor(head = null, tail = null) {
+    constructor(head = null) {
         this.head = head;
-        this.tail = tail;
-        if (head || tail) {
+        this.tail = head;
+        if (this.head || this.tail) {
             this.length = 1
         } else {
             this.length = 0
