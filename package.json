@@ -1,7 +1,7 @@
 {
-  "name": "linkedlist-library",
+  "name": "noel-stdlib-js",
   "version": "1.0.0",
-  "description": "A LinkedList implementation in JavaScript with a sample use case",
+  "description": "A Standard Library for implementations of various Data Structures and Algorithms in JavaScript and Node.js with sample use cases",
   "main": "app.js",
   "scripts": {
     "start": "node app.js"
