@@ -224,7 +224,7 @@ class LinkedList {
 
     /**
      * Creates an iterable of [index, value] pairs for every Node and its data in the LinkedList.
-     * @returns {Iterable[]} An iterable of the key, value pairs
+     * @returns {Iterable<[K, V]>} An iterable of the key, value pairs
      */
     entries() {
         const list = this;
