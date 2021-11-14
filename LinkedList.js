@@ -19,6 +19,11 @@ class LinkedList {
     constructor(head = null, tail = null) {
         this.head = head;
         this.tail = tail;
+        if (head || tail) {
+            this.length = 1
+        } else {
+            this.length = 0
+        }
     }
 
     /**
@@ -26,13 +31,14 @@ class LinkedList {
      * @returns {number} The number of Nodes in the LinkedList
      */
     size() {
-        let count = 0;
-        let node = this.head;
-        while (node) {
-            count++;
-            node = node.next;
-        }
-        return count;
+        // let count = 0;
+        // let node = this.head;
+        // while (node) {
+        //     count++;
+        //     node = node.next;
+        // }
+        // return count;
+        return this.length;
     }
 
     /**
@@ -54,25 +60,57 @@ class LinkedList {
             return null;
         }
 
-        if (!Number(getIndex)) {
+        if (!Number(getIndex) && (Number(getIndex) !== 0)) {
             return undefined;
         }
 
-        let node = this.head;
-        let index = 0;
+        const size = this.size();
 
-        while (node) {
-            if (index === getIndex) {
-                return node.data;
-            }
+        if (getIndex >= size || getIndex < 0) {
+            return false;
+        }
 
-            if (index < getIndex) {
-                if (!node.next) {
-                    return false;
+        // Determine fastest direction to iterate
+        if (getIndex < (Math.round(size / 2))) {
+            // Iterate forward from the head
+            let node = this.head;
+            let index = 0;
+
+            while (node) {
+                if (index === getIndex) {
+                    return node.data;
                 }
 
-                node = node.next;
-                index++;
+                if (index < getIndex) {
+                    if (!node.next) {
+                        console.log('cant go next')
+                        return false;
+                    }
+
+                    node = node.next;
+                    index++;
+                }
+            }
+
+        } else {
+            // Iterate backward from the tail
+            let node = this.tail;
+            let index = (size - 1);
+
+            while (node) {
+                if (index === getIndex) {
+                    return node.data;
+                }
+
+                if (index > getIndex) {
+                    if (!node.previous) {
+                        console.log('cant go previous')
+                        return false;
+                    }
+
+                    node = node.previous;
+                    index--;
+                }
             }
         }
     }
@@ -107,14 +145,16 @@ class LinkedList {
     insert(data) {
         const node = new Node(data, this.head, null);
 
-        if(this.head === null) {
+        if (this.head === null) {
             this.head = node;
             this.tail = node;
+            this.length++;
             return;
         }
 
         this.head.previous = node
         this.head = node;
+        this.length++;
     }
 
     /**
@@ -124,14 +164,17 @@ class LinkedList {
     insertLast(data) {
         const node = new Node(data, null, this.tail);
 
+
         if (!this.head) {
             this.head = node;
             this.tail = this.head;
+            this.length++;
             return;
         }
 
         this.tail.next = node;
         this.tail = node;
+        this.length++;
     }
 
     /**
@@ -143,6 +186,7 @@ class LinkedList {
         }
 
         this.head = this.head.next;
+        this.length--;
     }
 
     /**
@@ -156,22 +200,24 @@ class LinkedList {
         if (!this.head.next) {
             this.head = null;
             this.tail = null;
+            this.length--;
             return;
         }
 
-            let node = this.head;
-            let previousNode = this.head;
+        let node = this.head;
+        let previousNode = this.head;
 
-            while (node) {
-                // Stop updating the previous reference at the final node
-                if (node.next) {
-                    previousNode = node;
-                }
-                node = node.next;
+        while (node) {
+            // Stop updating the previous reference at the final node
+            if (node.next) {
+                previousNode = node;
             }
+            node = node.next;
+        }
 
-            previousNode.next = null;
-            this.tail = previousNode;
+        previousNode.next = null;
+        this.tail = previousNode;
+        this.length--;
     }
 }
 
