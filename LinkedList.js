@@ -13,8 +13,9 @@ class LinkedList {
     /**
      * @param {Node} head 
      */
-    constructor(head = null) {
+    constructor(head = null, tail = null) {
         this.head = head;
+        this.tail = tail;
     }
 
     /**
@@ -36,6 +37,7 @@ class LinkedList {
      */
     clear() {
         this.head = null;
+        this.tail = null;
     }
 
     /**
@@ -109,6 +111,11 @@ class LinkedList {
      */
     insert(data) {
         const node = new Node(data, this.head);
+
+        if(this.head === null) {
+            this.tail = node
+        }
+
         this.head = node;
     }
 
@@ -131,6 +138,7 @@ class LinkedList {
         }
 
         tail.next = new Node(data);
+        this.tail = tail.next
     }
 
     /**
@@ -154,17 +162,23 @@ class LinkedList {
 
         if (!this.head.next) {
             this.head = null;
+            this.tail = null;
+            return;
         }
 
             let node = this.head;
             let previousNode = this.head;
 
             while (node) {
-                previousNode = node;
+                // Stop updating the previous reference at the final node
+                if (node.next) {
+                    previousNode = node;
+                }
                 node = node.next;
             }
 
             previousNode.next = null;
+            this.tail = previousNode;
     }
 }
 
