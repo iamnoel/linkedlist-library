@@ -4,7 +4,8 @@
   "description": "A Standard Library for implementations of various Data Structures and Algorithms in JavaScript and Node.js with sample use cases",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "test": "node app.spec.js"
   },
   "author": "Noel Ward",
   "license": "ISC"
