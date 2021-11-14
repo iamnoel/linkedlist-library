@@ -10,6 +10,23 @@ class Node {
         this.next = next;
         this.previous = previous;
     }
+
+    [Symbol.iterator]() {
+        const values = Object.values(this)
+        let index = 0;
+
+        return {
+            next() {
+                if (index < values.length) {
+                    const value = values[index];
+                    index++;
+                    return { value: value, done: false};
+                } else {
+                    return { done: true };
+                }
+            }
+        }
+    }
 }
 
 class LinkedList {
@@ -24,6 +41,24 @@ class LinkedList {
             this.length = 1
         } else {
             this.length = 0
+        }
+    }
+
+    [Symbol.iterator]() {
+        let node = this.head;
+        let index = 0;
+
+        return {
+            next() {
+                if (node !== null) {
+                    const value = node.data;
+                    index++;
+                    node = node.next;
+                    return { value: value, done: false};
+                } else {
+                    return { done: true };
+                }
+            }
         }
     }
 
@@ -237,9 +272,6 @@ class LinkedList {
             },
             next() {
                 if (node !== null) {
-                    // const value = { key: [index], value: [node.data]}
-                    // const value = { key: [index], value: [node.data]}
-                    // const value = { value: { key: [index], value: [node.data]}}
                     const value = { value: [index, node.data] }
                     index++;
                     node = node.next;
