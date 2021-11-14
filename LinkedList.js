@@ -1,17 +1,20 @@
 class Node {
     /**
-     * @param {number} data 
-     * @param {Node} next 
+     * @param {number} data The data to be stored
+     * @param {Node} next A reference to the next Node in a list
+     * @param {Node} previous A reference to the previous Node in a list
      */
-    constructor(data, next = null) {
+    constructor(data, next = null, previous = null) {
         this.data = data;
         this.next = next;
+        this.previous = previous;
     }
 }
 
 class LinkedList {
     /**
-     * @param {Node} head 
+     * @param {Node} head The first Node in the LinkedList
+     * @param {Node} tail The last Node in the LinkedList
      */
     constructor(head = null, tail = null) {
         this.head = head;
@@ -90,19 +93,11 @@ class LinkedList {
      * @returns The data stored in the last Node
      */
     getLast() {
-        if (!this.head) {
+        if (!this.head || !this.tail) {
             return null;
         }
 
-        let node = this.head;
-
-        while (node) {
-            if (!node.next) {
-                return node;
-            }
-
-            node = node.next;
-        }
+        return this.tail.data;
     }
 
     /**
@@ -110,12 +105,15 @@ class LinkedList {
      * @param {number} data A number to be stored in the data of the Node
      */
     insert(data) {
-        const node = new Node(data, this.head);
+        const node = new Node(data, this.head, null);
 
         if(this.head === null) {
-            this.tail = node
+            this.head = node;
+            this.tail = node;
+            return;
         }
 
+        this.head.previous = node
         this.head = node;
     }
 
@@ -124,21 +122,16 @@ class LinkedList {
      * @param {number} data A number to be stored in the data of the Node
      */
     insertLast(data) {
+        const node = new Node(data, null, this.tail);
+
         if (!this.head) {
-            this.head = new Node(data);
+            this.head = node;
+            this.tail = this.head;
             return;
         }
 
-        let node = this.head;
-        let tail = this.head;
-
-        while (node) {
-            tail = node;
-            node = node.next;
-        }
-
-        tail.next = new Node(data);
-        this.tail = tail.next
+        this.tail.next = node;
+        this.tail = node;
     }
 
     /**
