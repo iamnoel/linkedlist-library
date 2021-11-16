@@ -263,12 +263,12 @@ class LinkedList {
      */
     forEach(callbackfn) {
         if(!callbackfn) {
-            console.log('undefined callback function', (new Error()).stack.split("\n")[2])
-            throw Error(`${callbackfn} is not a function`)
+            console.log('undefined callback function', (new Error()).stack.split("\n")[2]);
+            return undefined;
         }
         
         for (const [key, value] of this.entries()) {
-            callbackfn(value, key, this)
+            callbackfn(value, key, this);
         }
     }
 
