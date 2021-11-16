@@ -2,31 +2,15 @@ const { LinkedList } = require('./LinkedList');
 
 const list = new LinkedList();
 
-// Demonstrate creating and adding Objects into the LinkedList
-const testObj1 = {
-    id: 1,
-    name: 'Object 1 (insert)',
-};
-
-const testObj2 = {
-    id: 2,
-    name: 'Object 2 (insert)',
+// Demonstrate creating Objects and adding them into the LinkedList
+for (let i = 1; i < 5; i++) {
+    const obj = {
+        id: i,
+        name: `Object ${i} (insert)`
+    }
+    list.insert(obj)
 }
-
-const testObj3 = {
-    id: 3,
-    name: 'Object 3 (insert last)',
-}
-
-const testObj4 = {
-    id: 4,
-    name: 'Object 4 (insert)',
-}
-
-list.insert(testObj1);
-list.insert(testObj2);
-list.insertLast(testObj3);
-list.insert(testObj4);
+list.insertLast({ id: 5, name: 'Object 5 (insert last)' })
 
 // Replacer function for JSON stringify to replace the circular references in the Nodes' references to the previous Node in the list with a string
 const replaceCircularReferences = (key, value) => {
@@ -41,6 +25,8 @@ const replaceCircularReferences = (key, value) => {
 
 // Call json stringify with that same replacer code but as an anonymous function
 console.log(JSON.stringify( list, (key, value) => key === 'previous' ? value?.data?.id ? `Node ${value.data.id}` : null : value, 3))
+
+list.set(3, { id: 1, name: 'Object 1 (Updated)' })
 
 // Demonstrate forEach with two arguments in the callback (all 3 are optional) using an anonymous function for the callback
 list.forEach((e, k) => {console.log('Callback Function at index ', k, '| ', e)})
@@ -71,7 +57,7 @@ console.log('List before removing removing any values:', list)
 list.removeLast();
 console.log(list)
 
-console.log('Value of list at index 2: ', list.get(2))
+console.log('Value of the Node at list index 2: ', list.get(2))
 
 list.removeLast();
 console.log(list)

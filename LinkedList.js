@@ -152,6 +152,70 @@ class LinkedList {
     }
 
     /**
+     * Sets the data of a Node at a given index
+     * @param {number} setIndex The index of the Node within the list
+     * @param {*} data The data to be stored 
+     * @returns the new data if successful, false if there are fewer Nodes than the requested index, null if there are no Nodes in the list, undefined if the specified index is not a number
+     */
+    set(setIndex, data) {
+        if (!this.head) {
+            return null;
+        }
+
+        if (!Number(setIndex) && (Number(setIndex) !== 0)) {
+            return undefined;
+        }
+
+        if (setIndex >= this.length || setIndex < 0) {
+            return false;
+        }
+
+        // Determine fastest direction to iterate
+        if (setIndex < (Math.round(this.length / 2))) {
+            // Iterate forward from the head
+            let node = this.head;
+            let index = 0;
+
+            while (node) {
+                if (index === setIndex) {
+                    node.data = data;
+                    return node.data;
+                }
+
+                if (index < setIndex) {
+                    if (!node.next) {
+                        return false;
+                    }
+
+                    node = node.next;
+                    index++;
+                }
+            }
+
+        } else {
+            // Iterate backward from the tail
+            let node = this.tail;
+            let index = (this.length - 1);
+
+            while (node) {
+                if (index === setIndex) {
+                    node.data = data;
+                    return node.data;
+                }
+
+                if (index > setIndex) {
+                    if (!node.previous) {
+                        return false;
+                    }
+
+                    node = node.previous;
+                    index--;
+                }
+            }
+        }
+    }
+
+    /**
      * Gets the data from a Node at the head of the LinkedList
      * @returns The data stored in the first Node
      */
