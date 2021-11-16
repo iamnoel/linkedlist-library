@@ -36,7 +36,14 @@ const replaceCircularReferences = (key, value) => {
  return value;
 }
 
-console.log(JSON.stringify( list, replaceCircularReferences, 3))
+// Call json stringify with the replacer function
+// console.log(JSON.stringify( list, replaceCircularReferences, 3))
+
+// Call json stringify with that same replacer code but as an anonymous function
+console.log(JSON.stringify( list, (key, value) => key === 'previous' ? value?.data?.id ? `Node ${value.data.id}` : null : value, 3))
+
+// Demonstrate forEach with two arguments in the callback (all 3 are optional) using an anonymous function for the callback
+list.forEach((e, k) => {console.log('Callback Function at index ', k, '| ', e)})
 
 // Demonstrate 'for...of' Iterable of the base LinkedList class
 for (const element of list) {

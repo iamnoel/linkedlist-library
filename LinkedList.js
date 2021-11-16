@@ -258,6 +258,21 @@ class LinkedList {
 
 
     /**
+     * Performs the specified action for each Node in a LinkedList
+     * @param {(value, index: number, list: LinkedList) => void} callbackfn A function that accepts up to three arguments. forEach calls the callbackfn function one time for each Node in the LinkedList.
+     */
+    forEach(callbackfn) {
+        if(!callbackfn) {
+            console.log('undefined callback function', (new Error()).stack.split("\n")[2])
+            throw Error(`${callbackfn} is not a function`)
+        }
+        
+        for (const [key, value] of this.entries()) {
+            callbackfn(value, key, this)
+        }
+    }
+
+    /**
      * Creates an iterable of [index, value] pairs for every Node and its data in the LinkedList.
      * @returns {Iterable<[K, V]>} An iterable of the key, value pairs
      */
