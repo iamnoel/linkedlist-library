@@ -11,3 +11,12 @@ test('Adds a node to a LinkedList', () => {
   expect(list.get(0)).toBeDefined();
   expect(list.size()).toBe(1);
 });
+
+test('Removes a node from a LinkedList before setting one', () => {
+  const list = new LinkedList();
+  
+  list.removeFirst()
+
+  expect(list.get(0)).toBe(null);
+  expect(list.size()).toBe(0);
+});
