@@ -5,13 +5,15 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "test": "node app.spec.js"
+    "test": "node app.spec.js",
+    "unittests": "jest .unit.spec.js"
   },
   "author": "Noel Ward",
   "license": "ISC",
   "dependencies": {},
   "devDependencies": {
     "eslint": "^8.15.0",
-    "eslint-config-google": "^0.14.0"
+    "eslint-config-google": "^0.14.0",
+    "jest": "^28.1.0"
   }
 }
