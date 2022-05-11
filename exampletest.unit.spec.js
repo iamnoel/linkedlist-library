@@ -17,6 +17,6 @@ test('Removes a node from a LinkedList before setting one', () => {
   
   list.removeFirst()
 
-  expect(list.get(0)).toBe(false);
+  expect(list.get(0)).toBe(null);
   expect(list.size()).toBe(0);
 });
