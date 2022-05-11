@@ -18,6 +18,6 @@ test('Removes a node from a LinkedList before setting one', () => {
   list.removeFirst()
 
   // Want to see the test fail in the GH action
-  expect(list.get(0)).toBeDefined();
-  expect(list.size()).toBe(1);
+  expect(list.get(0)).toBe(false);
+  expect(list.size()).toBe(0);
 });
